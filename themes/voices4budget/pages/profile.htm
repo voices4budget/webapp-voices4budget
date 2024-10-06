@@ -62,9 +62,9 @@ redirect = "home"
                             />
                         </div>
                         <div>
-                            <label for="inputAge" class="form-label">Usia</label>
+                            <label for="inputAge" class="form-label">Rentang Usia</label>
                             <select name="data[age]" id="inputAge" class="form-select" aria-label="Age">
-                                <option>-- Select Age Range --</option>
+                                <option>-- Pilih rentang usia --</option>
                                 <option value="15-25" {{ user.data['age'] == '15-25' ? 'selected' : '' }}>
                                     15-25 tahun
                                 </option>
@@ -87,7 +87,7 @@ redirect = "home"
                                 class="form-select"
                                 aria-label="Default select example"
                             >
-                                <option>-- Select Gender --</option>
+                                <option>-- Pilih jenis kelamin --</option>
                                 <option value="MALE" {{ user.data['gender'] == 'MALE' ? 'selected' : '' }}>Male</option>
                                 <option value="FEMALE" {{ user.data['gender'] == 'FEMALE' ? 'selected' : '' }}>
                                     Perempuan
