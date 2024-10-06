@@ -365,6 +365,10 @@ a {
 	}
 }
 
+.opacity-70 {
+	opacity: 0.7;
+}
+
 .main-content {
 	padding: 3.5rem 0;
 	h2 {
@@ -1424,6 +1428,135 @@ footer {
 		.eb-text {
 			.ebt-title {
 				font-size: 18px;
+			}
+		}
+	}
+}
+
+.error-page {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: $white;
+	.ep-content {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+		padding: 3rem 6rem;
+		// background-color: $white;
+		// box-shadow: transparent 0px 64px 64px -32px, transparent 0px 32px 32px -16px, transparent 0px 16px 16px -8px, #003d3d0a 0px 12px 12px -6px, #003d3d0a 0px 6px 6px -3px, #003d3d0a 0px 3px 3px -1.5px, #001f1f14 0px 1px 1px -0.5px, #003d3d0a 0px 0px 0px 1px;
+		// border-radius: 12px;
+		.ep-img {
+			img {
+				width: 350px;
+			}
+			&.epi-server {
+				img {
+					width: 280px;
+				}
+			}
+		}
+		.ep-desc {
+			.ep-title {
+				font-size: 24px;
+				font-weight: 700;
+				max-width: 400px;
+				margin-bottom: 0.75rem;
+				margin-top: 1.25rem;
+			}
+			.ep-error {
+				margin-bottom: 2rem;
+				font-size: 16px;
+			}
+		}
+	}
+	@media only screen and (max-width: 834px) {
+		.ep-content {
+			width: 100%;
+			flex-direction: column;
+			padding: 0 24px 32px 24px;
+			gap: 20px;
+			box-shadow: none;
+			border-radius: 0;
+			.ep-img {
+				img {
+					width: 220px;
+				}
+				&.epi-server {
+					img {
+						width: 200px;
+					}
+				}
+			}
+			.ep-desc {
+				width: 100%;
+				border-top: 1px solid $border-light;
+				padding-top: 2rem;
+				text-align: center;
+				.ep-title {
+					font-size: 18px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+				.ep-error {
+					margin-bottom: 1.25rem;
+					font-size: 14px;
+				}
+				.btn {
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}
+
+.guide-arrow {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
+	padding: 2rem 1rem;
+	.ga-img {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 164px;
+		height: 164px;
+		border-radius: 164px;
+		background-color: $bg-gray;
+		img {
+			width: 120px;
+		}
+	}
+	.ga-text {
+		position: relative;
+		font-size: 16px;
+		font-weight: 600;
+		.curved-arrow {
+			position: absolute;
+			left: -156px;
+			bottom: -8px;
+			width: 164px;
+		}
+	}
+	@media only screen and (max-width: 834px) {
+		padding: 1rem;
+		.ga-img {
+			width: 156px;
+			height: 156px;
+			border-radius: 156px;
+			img {
+				width: 112px;
+			}
+		}
+		.ga-text {
+			font-size: 14px;
+			.curved-arrow {
+				display: none;
 			}
 		}
 	}
