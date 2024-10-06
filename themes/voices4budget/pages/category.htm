@@ -14,6 +14,16 @@ localeUrl[th] = "/category/:category"
 localeTitle[en] = "List of Programs"
 localeTitle[th] = "หน้าแรก"
 ==
+function onStart() {
+
+}
+
+function onRedirectToProfile() {
+    Flash::warning(\RainLab\Translate\Models\Message::trans('category.complete_profile_first'));
+
+    return Redirect::to('/' . Request::segment(1) . '/profile?ref=/' . Request::path());
+}
+==
 <div class="main-content mcpt-25">
     <div class="container">
         <div class="title-subtitle">
@@ -69,8 +79,12 @@ localeTitle[th] = "หน้าแรก"
                                     </div>
                                 </div>
                                 <div class="mb-4">
+                                    <h6 class="fw-500">{{ 'program.modal.description'|__ }}</h6>
+                                    <div>{{ program.description|raw }}</div>
+                                </div>
+                                <div class="mb-4">
                                     <h6 class="fw-500">{{ 'program.modal.goal'|__ }}</h6>
-                                    <div>{{ program.goal }}</div>
+                                    <div>{{ program.goal|raw }}</div>
                                 </div>
                                 {% partial 'components/program-comment' %}
                             </div>
@@ -80,10 +94,14 @@ localeTitle[th] = "หน้าแรก"
                                 </button>
                                     <button
                                         type="button"
-                                        class="btn btn-primary vote {{ user and categoryDetail.category.isVotedByCurrentUser ? 'd-none' : '' }}"
-                                        {% if user and not categoryDetail.category.isVotedByCurrentUser %}
+                                        class="btn btn-primary {{ user and user.hasCompletedProfile ? 'vote' : '' }} {{ user and categoryDetail.category.isVotedByCurrentUser ? 'd-none' : '' }}"
+                                        {% if user and user.hasCompletedProfile and not categoryDetail.category.isVotedByCurrentUser %}
                                             data-program-id="{{ program.id }}"
                                             data-bs-dismiss="modal"
+                                        {% endif %}
+                                        {% if user and not user.hasCompletedProfile %}
+                                            data-request="onRedirectToProfile"
+                                            data-request-flash
                                         {% endif %}
                                         {% if not user %}
                                             data-bs-toggle="modal"

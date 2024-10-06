@@ -12,10 +12,19 @@ redirect = "home"
 [account]
 
 ==
+{% flash %}
+    <p
+        data-control="flash-message"
+        data-type="{{ type }}"
+        data-interval="5">
+        {{ message }}
+    </p>
+{% endflash %}
+
 <div class="bg-gradient text-white greeting-box gb-mintop">
     <div class="container">
-        <h1>Update Profile</h1>
-        <p>Make Changes to Your Personal Information</p>
+        <h1>{{ 'profile.title'|__ }}</h1>
+        <p>{{ 'profile.subtitle'|__ }}</p>
     </div>
 </div>
 
@@ -118,9 +127,6 @@ redirect = "home"
                                 </select>
                             </div>
                         {% endfor %}
-                        <div class="example-captcha">
-                            <img src="img/captcha.png" alt="" />
-                        </div>
                     </div>
                 </div>
                 <div class="mp-cta">
