@@ -1,0 +1,8 @@
+{
+    "name": "voices4budget/voices4budget-theme",
+    "type": "october-theme",
+    "description": "Voices4Budget",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
