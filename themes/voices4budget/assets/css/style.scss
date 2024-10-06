@@ -550,6 +550,8 @@ a {
 		}
 		.cli-text {
 			flex: 1;
+			min-width: 0;
+			word-wrap: break-word;
 		}
 		&.cli-selected {
 			border-color: $primary;
