@@ -87,7 +87,7 @@ localeTitle[th] = "หน้าแรก"
                             </svg>
                             <div class="text-muted">
                                 {% if not activeVotingSession.session.hasEnded %}
-                                {{ 'vote.see_results_on'|__ }} <span class="fw-600">{{ activeVotingSession.session.ends_at.format('j F Y, H:i') }}</span>
+                                {{ 'vote.see_results_on'|_({ end_date: activeVotingSession.session.ends_at.format('j F Y, H:i') }) }} <span class="fw-600"></span>
                                 {% else %}
                                 {{ 'vote.results_available'|__ }}
                                 {% endif %}

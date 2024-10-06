@@ -165,7 +165,7 @@ localeTitle[th] = "หน้าแรก"
 
                                             showSuccessPopup({
                                                 title: "{{ 'voted.dialog.title'|__ }}",
-                                                text: "{{ 'voted.dialog.text'|__ }}",
+                                                text: "{{ 'voted.dialog.text'|_({ end_date: '{{ activeVotingSession.session.ends_at }}'}) }}",
                                                 confirmButtonText: "{{ 'general.ok'|__ }}",
                                             }, function (result) {
                                                 if (result.isConfirmed) {

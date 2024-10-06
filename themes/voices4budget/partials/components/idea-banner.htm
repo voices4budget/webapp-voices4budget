@@ -22,12 +22,14 @@
 <div class="modal fade" id="modal-idea" tabindex="-1" aria-labelledby="modal-idea-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable modal-program">
         <div class="modal-content">
+            {% if user %}
             <form
                 data-request="ideaForm::onSubmit"
                 id="idea-form"
                 data-request-flash
                 data-request-success="this.reset(); $('#modal-idea').modal('hide'); showSuccessPopup({title: '{{ 'general.thankyou'|__ }}', text: '{{ 'idea.modal.submitted'|__ }}', confirmButtonText: '{{ 'general.ok'|__ }}'})"
             >
+            
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modal-idea-label">{{ 'idea.modal.title'|__ }}</h1>
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'modal.close'|__ }}"></button> -->
@@ -49,6 +51,16 @@
                     <button type="submit" class="btn btn-primary">{{ 'modal.submit'|__ }}</button>
                 </div>
             </form>
+            {% else %}
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-idea-label">{{ 'idea.modal.title'|__ }}</h1>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning mb-0">
+                    {{ 'idea.modal.sign_in_first'|__ }}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
