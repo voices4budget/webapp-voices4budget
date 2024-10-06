@@ -11,7 +11,7 @@
         "october/all": "^3.6",
         "rainlab/user-plugin": "^3.1",
         "rainlab/builder-plugin": "^2.0",
-        "voices4budget/contents-plugin": ">=0.0.1",
+        "voices4budget/contents-plugin": "^1.0",
         "rainlab/translate-plugin": "^2.2",
         "stevebauman/location": "^7.3"
     },

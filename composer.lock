@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53c7c660e22a35e1dede18187d955add",
+    "content-hash": "a752881756cf13b4bf8ccf5131a693fc",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -8886,16 +8886,16 @@
         },
         {
             "name": "voices4budget/contents-plugin",
-            "version": "0.0.39.7",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:voices4budget/voices4budget-contents-oc-plugin.git",
-                "reference": "9232f39e3b1e9a4c3e80b52c8d6c44fedc86b968"
+                "url": "https://github.com/voices4budget/voices4budget-contents-oc-plugin.git",
+                "reference": "eedc22f71205c294d619e083fd444bcffb194738"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voices4budget/voices4budget-contents-oc-plugin/zipball/9232f39e3b1e9a4c3e80b52c8d6c44fedc86b968",
-                "reference": "9232f39e3b1e9a4c3e80b52c8d6c44fedc86b968",
+                "url": "https://api.github.com/repos/voices4budget/voices4budget-contents-oc-plugin/zipball/eedc22f71205c294d619e083fd444bcffb194738",
+                "reference": "eedc22f71205c294d619e083fd444bcffb194738",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -8935,7 +8935,7 @@
                 "issues": "https://github.com/gugigustaman/voices4budget-contents-oc-plugin/issues",
                 "source": "https://github.com/gugigustaman/voices4budget-contents-oc-plugin"
             },
-            "time": "2024-09-22T10:02:28+00:00"
+            "time": "2024-10-06T07:44:51+00:00"
         },
         {
             "name": "voku/portable-ascii",
