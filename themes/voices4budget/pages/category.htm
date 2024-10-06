@@ -183,11 +183,11 @@ function onRedirectToProfile() {
 
                                             showSuccessPopup({
                                                 title: "{{ 'voted.dialog.title'|__ }}",
-                                                text: "{{ 'voted.dialog.text'|_({ end_date: '{{ activeVotingSession.session.ends_at }}'}) }}",
+                                                text: data.next_category ? "{{ 'voted.dialog.text_next_category'|__ }}" : "{{ 'voted.dialog.text'|_({ end_date: activeVotingSession.session.ends_at|date('j F Y')}) }}",
                                                 confirmButtonText: "{{ 'general.ok'|__ }}",
                                             }, function (result) {
                                                 if (result.isConfirmed) {
-                                                    window.location.href = '/';
+                                                    window.location.href = '{{ '/?next='|localeUrl(this.site.locale) }}' + data.next_category;
                                                 }
                                             });
                                         } else {
