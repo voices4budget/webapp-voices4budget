@@ -1,6 +1,6 @@
 {
-    "name": "october/october",
-    "description": "Built using October CMS: The Laravel-Based CMS Engineered For Simplicity",
+    "name": "vocies4budget/webapp",
+    "description": "Web application for Voices4Budget. Digital Empowerment for Village Funds in Indonesia and Thailand.",
     "type": "project",
     "homepage": "https://octobercms.com",
     "license": "proprietary",
@@ -11,7 +11,8 @@
         "october/all": "^3.6",
         "rainlab/user-plugin": "^3.1",
         "rainlab/builder-plugin": "^2.0",
-        "voices4budget/contents-plugin": ">=0.0.1"
+        "voices4budget/contents-plugin": ">=0.0.1",
+        "rainlab/translate-plugin": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5|^9.0"
