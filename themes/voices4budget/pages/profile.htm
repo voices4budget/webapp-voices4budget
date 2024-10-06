@@ -42,7 +42,7 @@ redirect = "home"
                 <div class="mp-split">
                     <div class="mps-col">
                         <div>
-                            <label for="inputFirstName" class="form-label">First Name</label>
+                            <label for="inputFirstName" class="form-label">Nama Depan</label>
                             <input
                                 type="text"
                                 name="first_name"
@@ -52,7 +52,7 @@ redirect = "home"
                             />
                         </div>
                         <div>
-                            <label for="inputLastName" class="form-label">Name</label>
+                            <label for="inputLastName" class="form-label">Nama Belakang</label>
                             <input
                                 type="text"
                                 name="last_name"
@@ -62,25 +62,25 @@ redirect = "home"
                             />
                         </div>
                         <div>
-                            <label for="inputAge" class="form-label">Age</label>
+                            <label for="inputAge" class="form-label">Usia</label>
                             <select name="data[age]" id="inputAge" class="form-select" aria-label="Age">
                                 <option>-- Select Age Range --</option>
                                 <option value="15-25" {{ user.data['age'] == '15-25' ? 'selected' : '' }}>
-                                    15-25 years old
+                                    15-25 tahun
                                 </option>
                                 <option value="26-45" {{ user.data['age'] == '26-45' ? 'selected' : '' }}>
-                                    26-45 years old
+                                    26-45 tahun
                                 </option>
                                 <option value="46-65" {{ user.data['age'] == '46-65' ? 'selected' : '' }}>
-                                    46-65 years old
+                                    46-65 tahun
                                 </option>
                                 <option value="OTHERS" {{ user.data['age'] == 'OTHERS' ? 'selected' : '' }}>
-                                    Others
+                                    Lainnya
                                 </option>
                             </select>
                         </div>
                         <div>
-                            <label for="inputGender" class="form-label">Gender</label>
+                            <label for="inputGender" class="form-label">Jenis Kelamin</label>
                             <select
                                 name="data[gender]"
                                 id="inputGender"
@@ -90,10 +90,10 @@ redirect = "home"
                                 <option>-- Select Gender --</option>
                                 <option value="MALE" {{ user.data['gender'] == 'MALE' ? 'selected' : '' }}>Male</option>
                                 <option value="FEMALE" {{ user.data['gender'] == 'FEMALE' ? 'selected' : '' }}>
-                                    Female
+                                    Perempuan
                                 </option>
                                 <option value="OTHERS" {{ user.data['gender'] == 'OTHERS' ? 'selected' : '' }}>
-                                    Others
+                                    Laki-laki
                                 </option>
                             </select>
                         </div>
