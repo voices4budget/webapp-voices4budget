@@ -2,13 +2,19 @@
     <div class="ca-top">
         <h6 class="fw-500">{{ 'program.modal.comment.label'|__ }}</h6>
     </div>
-    <div class="ca-value" id="comment-{{program.id}}">
-        {% set comment = program.comments().currentSessionBy(user.id).first %}
+    <div class="ca-value" id="comment-{{ program.id }}">
+        {% if user %}
+            {% set comment = program.comments().currentSessionBy(user.id).first %}
 
-        {% if comment %}
-            {% partial 'components/commented' comment = comment %}
+            {% if comment %}
+                {% partial 'components/commented' comment = comment %}
+            {% else %}
+                {% partial 'components/comment-form' program = program %}
+            {% endif %}
         {% else %}
-            {% partial 'components/comment-form' program = program %}
+            <div class="alert alert-warning mb-0">
+                {{ 'program.modal.comment.sign_in_first'|__ }}
+            </div>
         {% endif %}
     </div>
 </div>
