@@ -113,7 +113,10 @@ function onStart() {
                             </svg>
                             <div class="text-muted">
                                 {% if not activeVotingSession.session.hasEnded %}
-                                {{ 'vote.see_results_on'|_({ end_date: activeVotingSession.session.ends_at.format('j F Y, H:i') }) }} <span class="fw-600"></span>
+                                {{ ('vote.see_results_on'|_({ end_date: '#end_date#' }))|replace({'#end_date#': ('<span class="fw-600 tz-dates">' ~ activeVotingSession.session.ends_at.format('c') ~ '</span>')|raw})|raw }}.
+
+                                {% partial 'app/tz-handler' %}
+                                
                                 {% else %}
                                 {{ 'vote.results_available'|__ }}
                                 {% endif %}

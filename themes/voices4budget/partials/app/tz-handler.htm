@@ -1,0 +1,11 @@
+{% put scripts %}
+<script src="https://momentjs.com/downloads/moment.js"></script>
+<script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.tz-dates').each(function(item, index) {
+            $(this).html(moment.utc($(this).html()).tz(moment.tz.guess()).format('D MMMM YYYY'));
+        });
+    });
+</script>
+{% endput %}

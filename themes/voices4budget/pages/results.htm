@@ -43,17 +43,19 @@ title = "Hasil Vote"
                     <img src="{{ 'assets/img/vote-results.svg'|theme }}" alt="" />
                 </div>
                 <div class="eb-text">
-                    <div class="ebt-title">There are no voting results yet</div>
+                    <div class="ebt-title">{{ 'vote.no_results'|__ }}</div>
                     <div class="text-muted">
                         {% if activeVotingSession.session %}
-                            You can see the voting results on
-                            <span class="fw-600">{{ activeVotingSession.session.ends_at.format('F j') }}</span>
+                            {{ 'vote.results.available_on'|__ }}
+                            <span class="fw-600 tz-dates">{{ activeVotingSession.session.ends_at.format('c') }}</span>
                         {% else %}
-                            There are no active voting session available at the moment.
+                            {{ 'vote.results.unavailable'|__ }}
                         {% endif %}
                     </div>
                 </div>
             </div>
+
+            {% partial 'app/tz-handler' %}
         {% else %}
             <div class="card-list clr-result">
                 {% for category in categoriesList.categories %}
