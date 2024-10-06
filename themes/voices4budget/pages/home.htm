@@ -51,7 +51,7 @@ function onStart() {
                     <div class="guide-arrow">
                         <div class="ga-img"><img src="{{ 'assets/img/category.svg'|theme }}" alt=""></div>
                         <div class="ga-text">
-                            {% if not completed %}
+                            {% if not user or not completed %}
                             {{ 'category.select'|__ }}
                             <img src="{{ 'assets/img/curved-arrow.gif'|theme }}" class="curved-arrow" alt="">
                             {% else %}
