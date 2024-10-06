@@ -1,0 +1,292 @@
+[countriesList]
+
+==
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+        <a class="navbar-brand" href="{{ '/'|localeUrl(this.site.locale) }}">
+            <img src="{{ 'assets/img/logo.svg'|theme }}" alt="" height="30" class="" />
+        </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasSidebar"
+            aria-controls="offcanvasSidebar"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ this.page.id == 'home' ? 'active' : '' }}"
+                        {{ this.page.id == 'home' ? 'aria-current="page"' : '"' }}
+                        href="{{ '/'|localeUrl(this.site.locale) }}"
+                        >{{ 'menu.programs'|__ }}</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ this.page.id == 'results' ? 'active' : '' }}"
+                        {{ this.page.id == 'results' ? 'aria-current="page"' : '"' }}
+                        href="{{ '/results'|localeUrl(this.site.locale) }}"
+                        >{{ 'menu.vote_results'|__ }}</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ this.page.id == 'about' ? 'active' : '' }}"
+                        {{ this.page.id == 'about' ? 'aria-current="page"' : '"' }}
+                        href="{{ '/about'|localeUrl(this.site.locale) }}"
+                        >{{ 'menu.about'|__ }}</a
+                    >
+                </li>
+            </ul>
+            <div class="d-flex flex-sm-row flex-column align-items-sm-center align-items-start gap-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarScrollingDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M12 19.677C13.88 18.041 15.366 16.3773 16.458 14.686C17.55 12.9947 18.096 11.5313 18.096 10.296C18.096 8.46667 17.517 6.95667 16.359 5.766C15.1997 4.576 13.7467 3.981 12 3.981C10.2533 3.981 8.80033 4.576 7.641 5.766C6.48167 6.956 5.90267 8.466 5.904 10.296C5.904 11.5307 6.45 12.994 7.542 14.686C8.634 16.378 10.12 18.0417 12 19.677ZM12 20.556C11.8433 20.556 11.6867 20.5303 11.53 20.479C11.3733 20.4277 11.2293 20.3443 11.098 20.229C10.3867 19.575 9.66533 18.8467 8.934 18.044C8.20333 17.242 7.54 16.411 6.944 15.551C6.348 14.691 5.85867 13.8133 5.476 12.918C5.09333 12.0227 4.90267 11.1487 4.904 10.296C4.904 8.18067 5.59267 6.436 6.97 5.062C8.348 3.68733 10.0247 3 12 3C13.9753 3 15.652 3.68733 17.03 5.062C18.4073 6.436 19.096 8.18067 19.096 10.296C19.096 11.1487 18.9053 12.0197 18.524 12.909C18.1427 13.7977 17.6567 14.675 17.066 15.541C16.476 16.4077 15.8157 17.239 15.085 18.035C14.3543 18.831 13.6327 19.556 12.92 20.21C12.7927 20.3253 12.648 20.412 12.486 20.47C12.3233 20.5273 12.161 20.556 11.999 20.556M12.003 11.731C12.4477 11.731 12.8277 11.5723 13.143 11.255C13.4577 10.9383 13.615 10.5573 13.615 10.112C13.615 9.66667 13.4563 9.28667 13.139 8.972C12.8217 8.65733 12.4407 8.5 11.996 8.5C11.5513 8.5 11.1713 8.65867 10.856 8.976C10.5407 9.29333 10.3833 9.67433 10.384 10.119C10.3847 10.5637 10.543 10.9437 10.859 11.259C11.175 11.5743 11.5563 11.7317 12.003 11.731Z"
+                                    fill="#E85D24"
+                                />
+                            </svg>
+                            Indonesia
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                            {% for country in countriesList.countries %}
+                                <li><a class="dropdown-item" href="#">{{ country.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarScrollingDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M12 21C10.7613 21 9.59467 20.7633 8.50001 20.29C7.40534 19.816 6.45201 19.1727 5.64001 18.36C4.82801 17.5473 4.18467 16.594 3.71001 15.5C3.23534 14.406 2.99867 13.2393 3.00001 12C3.00001 10.7573 3.23667 9.58967 3.71001 8.497C4.18401 7.40367 4.82734 6.45133 5.64001 5.64C6.45267 4.82867 7.40601 4.18533 8.50001 3.71C9.59467 3.23667 10.7613 3 12 3C13.2427 3 14.4103 3.23667 15.503 3.71C16.5963 4.184 17.549 4.82733 18.361 5.64C19.173 6.45267 19.816 7.405 20.29 8.497C20.7633 9.59033 21 10.758 21 12C21 13.2387 20.7633 14.4053 20.29 15.5C19.816 16.5947 19.1727 17.548 18.36 18.36C17.5473 19.172 16.595 19.8153 15.503 20.29C14.411 20.7647 13.2433 21.0013 12 21ZM12 20.008C12.5867 19.254 13.0707 18.5137 13.452 17.787C13.8327 17.0603 14.1423 16.247 14.381 15.347H9.61901C9.88367 16.2977 10.1997 17.1363 10.567 17.863C10.935 18.5897 11.4127 19.3047 12 20.008ZM10.727 19.858C10.2603 19.308 9.83434 18.628 9.44901 17.818C9.06367 17.0087 8.77701 16.1847 8.58901 15.346H4.75401C5.32734 16.5893 6.13967 17.6093 7.19101 18.406C8.24301 19.202 9.42167 19.686 10.727 19.858ZM13.273 19.858C14.5783 19.686 15.757 19.202 16.809 18.406C17.8603 17.6093 18.6727 16.5893 19.246 15.346H15.412C15.1587 16.1973 14.8397 17.0277 14.455 17.837C14.0697 18.647 13.6757 19.3213 13.273 19.858ZM4.34601 14.347H8.38101C8.30501 13.9363 8.25167 13.5363 8.22101 13.147C8.18901 12.7583 8.17301 12.376 8.17301 12C8.17301 11.624 8.18867 11.2417 8.22001 10.853C8.25134 10.4643 8.30467 10.0643 8.38001 9.653H4.34701C4.23834 9.99967 4.15334 10.3773 4.09201 10.786C4.03067 11.194 4.00001 11.5987 4.00001 12C4.00001 12.4013 4.03034 12.8063 4.09101 13.215C4.15167 13.6237 4.23667 14.0007 4.34601 14.346M9.38101 14.346H14.619C14.695 13.936 14.7483 13.5427 14.779 13.166C14.811 12.79 14.827 12.4013 14.827 12C14.827 11.5987 14.8113 11.21 14.78 10.834C14.7487 10.458 14.6953 10.0647 14.62 9.654H9.38001C9.30467 10.064 9.25134 10.4573 9.22001 10.834C9.18867 11.21 9.17301 11.5987 9.17301 12C9.17301 12.4013 9.18867 12.79 9.22001 13.166C9.25134 13.542 9.30567 13.9353 9.38101 14.346ZM15.62 14.346H19.654C19.7627 14 19.8477 13.623 19.909 13.215C19.9697 12.8063 20 12.4013 20 12C20 11.5987 19.9697 11.1937 19.909 10.785C19.8483 10.3763 19.7633 9.99933 19.654 9.654H15.619C15.695 10.064 15.7483 10.4637 15.779 10.853C15.811 11.2423 15.827 11.6247 15.827 12C15.827 12.3753 15.8113 12.7577 15.78 13.147C15.7487 13.5363 15.6953 13.9363 15.62 14.347M15.412 8.654H19.246C18.66 7.38467 17.8573 6.36467 16.838 5.594C15.8187 4.82333 14.6303 4.333 13.273 4.123C13.7397 4.737 14.1593 5.43933 14.532 6.23C14.9047 7.02 15.198 7.828 15.412 8.654ZM9.61901 8.654H14.381C14.117 7.71533 13.7913 6.86667 13.404 6.108C13.0167 5.34933 12.5487 4.644 12 3.992C11.4513 4.64333 10.9833 5.34867 10.596 6.108C10.2087 6.86733 9.88234 7.716 9.61901 8.654ZM4.75501 8.654H8.58901C8.80301 7.82867 9.09634 7.02067 9.46901 6.23C9.84167 5.43933 10.2613 4.737 10.728 4.123C9.35867 4.33367 8.16734 4.827 7.15401 5.603C6.14067 6.38033 5.34067 7.397 4.75401 8.653"
+                                    fill="#E85D24"
+                                />
+                            </svg>
+                            {{ this.site.code }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarScrollingDropdown">
+                            {% for site in sitePicker.sites %}
+                                <li>
+                                    <a
+                                        class="dropdown-item {{ this.site.code == site.code ? 'active' }}"
+                                        href="{{ site.url }}"
+                                        >{{ site.code }}</a
+                                    >
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% if user %}
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="ddAccount"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <div class="dd-account">
+                                    <img src="{{ user.avatar.path }}" alt="{{ user.full_name }}" />
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddAccount">
+                                <li><a class="dropdown-item" href="/profile">{{ 'menu.update_profile'|_ }}</a></li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        role="button"
+                                        data-request="onLogout"
+                                        data-request-data="{ redirect: '/' }"
+                                        >{{ 'menu.sign_out'|__ }}</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modal-sign-in"
+                        >
+                            {{ 'menu.sign_in'|__ }}
+                        </button>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="offcanvas-lg offcanvas-start d-lg-none" tabindex="-1" id="offcanvasSidebar">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">{{ 'menu.menu'|__ }}</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    data-bs-target="#offcanvasSidebar"
+                    aria-label="{{ 'modal.close'|__ }}"
+                ></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {{ this.page.id == 'home' ? 'active' : '' }}"
+                            {{ this.page.id == 'home' ? 'aria-current="page"' : '"' }}
+                            href="{{ '/'|localeUrl(this.site.locale) }}"
+                            >{{ 'menu.programs'|__ }}</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {{ this.page.id == 'results' ? 'active' : '' }}"
+                            {{ this.page.id == 'results' ? 'aria-current="page"' : '"' }}
+                            href="{{ '/results'|localeUrl(this.site.locale) }}"
+                            >{{ 'menu.vote_results'|__ }}</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link {{ this.page.id == 'about' ? 'active' : '' }}"
+                            {{ this.page.id == 'about' ? 'aria-current="page"' : '"' }}
+                            href="{{ '/about'|localeUrl(this.site.locale) }}"
+                            >{{ 'menu.about'|__ }}</a
+                        >
+                    </li>
+                    <hr class="border" />
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarScrollingDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M12 19.677C13.88 18.041 15.366 16.3773 16.458 14.686C17.55 12.9947 18.096 11.5313 18.096 10.296C18.096 8.46667 17.517 6.95667 16.359 5.766C15.1997 4.576 13.7467 3.981 12 3.981C10.2533 3.981 8.80033 4.576 7.641 5.766C6.48167 6.956 5.90267 8.466 5.904 10.296C5.904 11.5307 6.45 12.994 7.542 14.686C8.634 16.378 10.12 18.0417 12 19.677ZM12 20.556C11.8433 20.556 11.6867 20.5303 11.53 20.479C11.3733 20.4277 11.2293 20.3443 11.098 20.229C10.3867 19.575 9.66533 18.8467 8.934 18.044C8.20333 17.242 7.54 16.411 6.944 15.551C6.348 14.691 5.85867 13.8133 5.476 12.918C5.09333 12.0227 4.90267 11.1487 4.904 10.296C4.904 8.18067 5.59267 6.436 6.97 5.062C8.348 3.68733 10.0247 3 12 3C13.9753 3 15.652 3.68733 17.03 5.062C18.4073 6.436 19.096 8.18067 19.096 10.296C19.096 11.1487 18.9053 12.0197 18.524 12.909C18.1427 13.7977 17.6567 14.675 17.066 15.541C16.476 16.4077 15.8157 17.239 15.085 18.035C14.3543 18.831 13.6327 19.556 12.92 20.21C12.7927 20.3253 12.648 20.412 12.486 20.47C12.3233 20.5273 12.161 20.556 11.999 20.556M12.003 11.731C12.4477 11.731 12.8277 11.5723 13.143 11.255C13.4577 10.9383 13.615 10.5573 13.615 10.112C13.615 9.66667 13.4563 9.28667 13.139 8.972C12.8217 8.65733 12.4407 8.5 11.996 8.5C11.5513 8.5 11.1713 8.65867 10.856 8.976C10.5407 9.29333 10.3833 9.67433 10.384 10.119C10.3847 10.5637 10.543 10.9437 10.859 11.259C11.175 11.5743 11.5563 11.7317 12.003 11.731Z"
+                                    fill="#E85D24"
+                                />
+                            </svg>
+                            Indonesia
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                            {% for country in countriesList.countries %}
+                                <li><a class="dropdown-item" href="#">{{ country.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarScrollingDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M12 21C10.7613 21 9.59467 20.7633 8.50001 20.29C7.40534 19.816 6.45201 19.1727 5.64001 18.36C4.82801 17.5473 4.18467 16.594 3.71001 15.5C3.23534 14.406 2.99867 13.2393 3.00001 12C3.00001 10.7573 3.23667 9.58967 3.71001 8.497C4.18401 7.40367 4.82734 6.45133 5.64001 5.64C6.45267 4.82867 7.40601 4.18533 8.50001 3.71C9.59467 3.23667 10.7613 3 12 3C13.2427 3 14.4103 3.23667 15.503 3.71C16.5963 4.184 17.549 4.82733 18.361 5.64C19.173 6.45267 19.816 7.405 20.29 8.497C20.7633 9.59033 21 10.758 21 12C21 13.2387 20.7633 14.4053 20.29 15.5C19.816 16.5947 19.1727 17.548 18.36 18.36C17.5473 19.172 16.595 19.8153 15.503 20.29C14.411 20.7647 13.2433 21.0013 12 21ZM12 20.008C12.5867 19.254 13.0707 18.5137 13.452 17.787C13.8327 17.0603 14.1423 16.247 14.381 15.347H9.61901C9.88367 16.2977 10.1997 17.1363 10.567 17.863C10.935 18.5897 11.4127 19.3047 12 20.008ZM10.727 19.858C10.2603 19.308 9.83434 18.628 9.44901 17.818C9.06367 17.0087 8.77701 16.1847 8.58901 15.346H4.75401C5.32734 16.5893 6.13967 17.6093 7.19101 18.406C8.24301 19.202 9.42167 19.686 10.727 19.858ZM13.273 19.858C14.5783 19.686 15.757 19.202 16.809 18.406C17.8603 17.6093 18.6727 16.5893 19.246 15.346H15.412C15.1587 16.1973 14.8397 17.0277 14.455 17.837C14.0697 18.647 13.6757 19.3213 13.273 19.858ZM4.34601 14.347H8.38101C8.30501 13.9363 8.25167 13.5363 8.22101 13.147C8.18901 12.7583 8.17301 12.376 8.17301 12C8.17301 11.624 8.18867 11.2417 8.22001 10.853C8.25134 10.4643 8.30467 10.0643 8.38001 9.653H4.34701C4.23834 9.99967 4.15334 10.3773 4.09201 10.786C4.03067 11.194 4.00001 11.5987 4.00001 12C4.00001 12.4013 4.03034 12.8063 4.09101 13.215C4.15167 13.6237 4.23667 14.0007 4.34601 14.346M9.38101 14.346H14.619C14.695 13.936 14.7483 13.5427 14.779 13.166C14.811 12.79 14.827 12.4013 14.827 12C14.827 11.5987 14.8113 11.21 14.78 10.834C14.7487 10.458 14.6953 10.0647 14.62 9.654H9.38001C9.30467 10.064 9.25134 10.4573 9.22001 10.834C9.18867 11.21 9.17301 11.5987 9.17301 12C9.17301 12.4013 9.18867 12.79 9.22001 13.166C9.25134 13.542 9.30567 13.9353 9.38101 14.346ZM15.62 14.346H19.654C19.7627 14 19.8477 13.623 19.909 13.215C19.9697 12.8063 20 12.4013 20 12C20 11.5987 19.9697 11.1937 19.909 10.785C19.8483 10.3763 19.7633 9.99933 19.654 9.654H15.619C15.695 10.064 15.7483 10.4637 15.779 10.853C15.811 11.2423 15.827 11.6247 15.827 12C15.827 12.3753 15.8113 12.7577 15.78 13.147C15.7487 13.5363 15.6953 13.9363 15.62 14.347M15.412 8.654H19.246C18.66 7.38467 17.8573 6.36467 16.838 5.594C15.8187 4.82333 14.6303 4.333 13.273 4.123C13.7397 4.737 14.1593 5.43933 14.532 6.23C14.9047 7.02 15.198 7.828 15.412 8.654ZM9.61901 8.654H14.381C14.117 7.71533 13.7913 6.86667 13.404 6.108C13.0167 5.34933 12.5487 4.644 12 3.992C11.4513 4.64333 10.9833 5.34867 10.596 6.108C10.2087 6.86733 9.88234 7.716 9.61901 8.654ZM4.75501 8.654H8.58901C8.80301 7.82867 9.09634 7.02067 9.46901 6.23C9.84167 5.43933 10.2613 4.737 10.728 4.123C9.35867 4.33367 8.16734 4.827 7.15401 5.603C6.14067 6.38033 5.34067 7.397 4.75401 8.653"
+                                    fill="#E85D24"
+                                />
+                            </svg>
+                            EN
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarScrollingDropdown">
+                            {% for site in sitePicker.sites %}
+                                <li><a class="dropdown-item" href="{{ site.url }}">{{ site.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <hr class="border" />
+                    {% if user %}
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="ddAccount"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <div class="dd-account">
+                                    <img src="{{ user.avatar.path }}" alt="{{ user.full_name }}" />
+                                    <div class="dda-name">{{ user.full_name }}</div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddAccount">
+                                <li><a class="dropdown-item" href="/profile">{{ 'menu.update_profile'|__ }}</a></li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        role="button"
+                                        data-request="onLogout"
+                                        data-request-data="{ redirect: '/' }"
+                                        >{{ 'menu.sign_out'|__ }}</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-sign-in"
+                            >
+                                {{ 'menu.sign_in'|__ }}
+                            </button>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

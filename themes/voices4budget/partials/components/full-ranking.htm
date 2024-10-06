@@ -1,0 +1,10 @@
+{% for program in rankedPrograms %}
+    <div class="cl-item" data-bs-toggle="modal" data-bs-target="#modalChart">
+        <div class="cli-count {{ loop.index <= 3 ? 'clic-best' : '' }}">{{ loop.index }}</div>
+        <div class="cli-text">{{ program.title }}</div>
+        <div class="cli-vote">
+            <div class="cliv-count">{{ program.votes_count }}</div>
+            <div class="cliv-label">votes</div>
+        </div>
+    </div>
+{% endfor %}

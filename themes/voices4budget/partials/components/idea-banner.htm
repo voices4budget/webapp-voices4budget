@@ -1,0 +1,54 @@
+<div class="above-footer">
+    <div class="container">
+        <div class="af-plate">
+            <div class="af-content">
+                <div class="af-img">
+                    <img src="{{ 'assets/img/ideas.svg'|theme }}" alt="" />
+                </div>
+                <div class="">
+                    <h2 class="fw-600">{{ 'idea.banner.title'|__ }}</h2>
+                    <div class="fw-500 text-gray">{{ 'idea.banner.subtitle'|__ }}</div>
+                </div>
+            </div>
+            <div class="af-cta">
+                <a href="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-idea"
+                    >{{ 'idea.banner.button'|__ }}</a
+                >
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-idea" tabindex="-1" aria-labelledby="modal-idea-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable modal-program">
+        <div class="modal-content">
+            <form
+                data-request="ideaForm::onSubmit"
+                id="idea-form"
+                data-request-flash
+                data-request-success="this.reset(); $('#modal-idea').modal('hide'); showSuccessPopup({title: '{{ 'general.thankyou'|__ }}', text: '{{ 'idea.modal.submitted'|__ }}', confirmButtonText: '{{ 'general.ok'|__ }}'})"
+            >
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modal-idea-label">{{ 'idea.modal.title'|__ }}</h1>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'modal.close'|__ }}"></button> -->
+                </div>
+                <input type="hidden" name="category_id" value="{{ this.param.category }}" />
+                <div class="modal-body">
+                    <textarea
+                        class="form-control"
+                        rows="8"
+                        name="idea"
+                        id="idea"
+                        placeholder="{{ 'idea.modal.description.placeholder'|__ }}"
+                    ></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" areai-label="{{ 'modal.title'|__ }}">
+                        {{ 'modal.close'|__ }}
+                    </button>
+                    <button type="submit" class="btn btn-primary">{{ 'modal.submit'|__ }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

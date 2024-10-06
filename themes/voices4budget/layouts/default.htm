@@ -1,0 +1,31 @@
+[sitePicker]
+
+[session]
+security = "all"
+checkToken = 0
+
+[votersAuth]
+rememberMe = "never"
+twoFactorAuth = 0
+recoverPassword = 0
+
+[activeVotingSession]
+==
+<!doctype html>
+<html lang="en">
+    {% partial 'app/head' %}
+
+    <body>
+
+        {% partial 'components/navbar' %}
+
+        {% page %}
+
+        {% partial 'components/sign-in-modal' %}
+
+        {% partial 'components/footer' %}
+
+        {% partial 'app/scripts' %}
+        
+    </body>
+</html>

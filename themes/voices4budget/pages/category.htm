@@ -1,0 +1,200 @@
+url = "/category/:category"
+layout = "default"
+title = "Daftar Program"
+
+[categoryDetail]
+categoryId = "{{ :category }}"
+
+[ideaForm]
+
+
+[viewBag]
+localeUrl[en] = "/category/:category"
+localeUrl[th] = "/category/:category"
+localeTitle[en] = "List of Programs"
+localeTitle[th] = "หน้าแรก"
+==
+<div class="main-content mcpt-25">
+    <div class="container">
+        <div class="title-subtitle">
+            <div class="ts-left">
+                <a href="/" class="back-link primary-link">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.70696 12L16.424 4.285C16.5713 4.13767 16.644 3.96033 16.642 3.753C16.64 3.54633 16.5653 3.369 16.418 3.221C16.27 3.07367 16.0923 3 15.885 3C15.6783 3 15.501 3.07367 15.353 3.221L7.71696 10.864C7.55562 11.0253 7.43762 11.2053 7.36296 11.404C7.28829 11.6027 7.25129 11.8013 7.25196 12C7.25262 12.1987 7.28962 12.3973 7.36296 12.596C7.43629 12.7947 7.55429 12.9747 7.71696 13.136L15.359 20.78C15.507 20.9273 15.6836 21 15.889 20.998C16.0936 20.996 16.2696 20.9213 16.417 20.774C16.5643 20.6267 16.638 20.4493 16.638 20.242C16.638 20.0347 16.5643 19.8577 16.417 19.711L8.70696 12Z"
+                        />
+                    </svg>
+                    <h2 class="fw-600">{{ categoryDetail.category.title }}</h2>
+                    <input type="hidden" id="category_id" value="{{ categoryDetail.category.id }}" />
+                </a>
+                <div class="alert alert-orange-light">
+                    <div class="alert-text">
+                        {{ 'vote.instructions'|_({max_vote: categoryDetail.category.max_vote}) }}
+                    </div>
+                    {% if user %}
+                    <div class="badge-voted">
+                        <span class="text-gray">{{ 'vote.categories_voted'|__ }}:</span> {{ categoryDetail.votedCounts }} {{ 'general.of'|__ }} {{ categoryDetail.subcategoriesCount }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card-list">
+            {% for program in categoryDetail.category.programs %}
+                <div
+                    id="program-item-{{ program.id }}"
+                    class="cl-item program {% if user and program.isVotedByCurrentUser %} cli-selected {% endif %}"
+                    data-bs-toggle="modal"
+                    data-bs-target="#program-{{ program.id }}"
+                    data-program-id="{{ program.id }}"
+                >
+                    <div class="cli-count">{{ program.letter_index }}</div>
+                    <div class="cli-text">{{ program.title }}</div>
+                </div>
+                <!-- Modal -->
+                <div
+                    class="modal fade"
+                    id="program-{{ program.id }}"
+                    tabindex="-1"
+                    aria-labelledby="modalProgramLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable modal-program">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="card-list cl-onmodal">
+                                    <div class="cl-item">
+                                        <div class="cli-count">{{ program.letter_index }}</div>
+                                        <div class="cli-text">{{ program.title }}</div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <h6 class="fw-500">{{ 'program.modal.goal'|__ }}</h6>
+                                    <div>{{ program.goal }}</div>
+                                </div>
+                                {% partial 'components/program-comment' %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
+                                    {{ 'modal.cancel'|__ }}
+                                </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-primary vote {{ user and categoryDetail.category.isVotedByCurrentUser ? 'd-none' : '' }}"
+                                        {% if user and not categoryDetail.category.isVotedByCurrentUser %}
+                                            data-program-id="{{ program.id }}"
+                                            data-bs-dismiss="modal"
+                                        {% endif %}
+                                        {% if not user %}
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modal-sign-in"
+                                        {% endif %}
+                                        {{ activeVotingSession.session.hasEnded ? 'disabled' : '' }}
+                                    >
+                                        {{ activeVotingSession.session.hasEnded ? 'program.modal.ended_vote_session'|__ : 'program.modal.vote'|__ }}
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if user and not activeVotingSession.session.hasEnded and not categoryDetail.category.isVotedByCurrentUser %}
+            <div class="cta-submit">
+                <button class="btn btn-primary" id="btn-submit-vote">{{ 'vote.submit'|__ }} (<span id="voted-count">0</span>/{{ categoryDetail.category.max_vote }})</button>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% partial 'components/idea-banner' %}
+
+{% if user and not activeVotingSession.session.hasEnded and not categoryDetail.category.isVotedByCurrentUser %}
+{% put scripts %}
+    <script type="text/javascript">
+        $(function () {
+            var votedCount = 0;
+
+            $('.vote').click(function () {
+                let item = $('#program-item-' + $(this).data('programId'));
+
+                if (!item.hasClass('cli-selected')) {
+                    item.addClass('cli-selected');
+                    $(this).text("{{ 'program.modal.cancel_vote'|__ }}");
+                    $(this).addClass('voted');
+                    votedCount++;
+                } else {
+                    item.removeClass('cli-selected');
+                    $(this).text("{{ 'program.modal.vote'|__ }}");
+                    $(this).removeClass('voted');
+                    votedCount--;
+                }
+
+                if (votedCount >= {{ categoryDetail.category.max_vote }}) {
+                    $('.vote:not(.voted)').prop('disabled', true);
+                } else {
+                    $('.vote:not(.voted)').prop('disabled', false);
+                }
+
+                $('#voted-count').text(votedCount);
+            });
+
+            $('#btn-submit-vote').click(function () {
+                    showConfirmationPopup(
+                        {
+                            title: "{{ 'dialog.are_you_sure'|__ }}",
+                            text: "{{ 'vote.dialog.confirmation_text'|__ }}",
+                            confirmButtonText: "{{ 'vote.dialog.yes'|__ }}",
+                            cancelButtonText: "{{ 'modal.cancel'|__ }}",
+                        },
+                        function (result) {
+                            if (result.isConfirmed) {
+                                let ids = [];
+
+                                $('.program.cli-selected').each(function (index, item) {
+                                    ids.push($(this).data('programId'));
+                                });
+
+                                oc.ajax('onSubmitVote', {
+                                    data: {
+                                        category_id: $('#category_id').val(),
+                                        program_ids: ids,
+                                    },
+                                    complete: function (data) {
+                                        if (data.success) {
+
+                                            showSuccessPopup({
+                                                title: "{{ 'voted.dialog.title'|__ }}",
+                                                text: "{{ 'voted.dialog.text'|__ }}",
+                                                confirmButtonText: "{{ 'general.ok'|__ }}",
+                                            }, function (result) {
+                                                if (result.isConfirmed) {
+                                                    window.location.href = '/';
+                                                }
+                                            });
+                                        } else {
+                                            Swal.fire({
+                                                title: '{{ 'general.failed'|__ }}',
+                                                text: data.message,
+                                                icon: 'danger',
+                                                customClass: 'swal-custom',
+                                                reverseButtons: true,
+                                                confirmButtonColor: '#E85D24',
+                                                // cancelButtonColor: '#d33',
+                                                confirmButtonText: '{{ 'general.ok'|__ }}',
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    location.reload();
+                                                }
+                                            });
+                                        }
+                                    },
+                                });
+                            }
+                        },
+                    );
+                });
+        });
+    </script>
+{% endput %}
+{% endif %}

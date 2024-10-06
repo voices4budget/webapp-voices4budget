@@ -1,0 +1,28 @@
+<form
+    data-request="onPostComment"
+    data-request-flash
+    data-request-data="{ program_id: {{ program.id }} }"
+    data-request-update="{ 'components/commented': '#comment-{{ program.id }}' }"
+>
+    <textarea
+        class="form-control"
+        rows="3"
+        name="comment"
+        id=""
+        placeholder="{{ 'program.modal.comment.placeholder'|__ }}"
+    >{{ program_comment.comment ?? '' }}</textarea>
+    <div class="cav-action">
+        <button type="submit" class="primary-link border-0 bg-transparent">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M11.6667 4.99999H18.3334M15 1.66666V8.33332M5.08252 16.25C3.99974 16.1433 3.18669 15.8178 2.64335 15.2733C1.66669 14.2975 1.66669 12.7258 1.66669 9.58332V9.16666C1.66669 6.02416 1.66669 4.45249 2.64335 3.47666C3.62002 2.50082 5.19085 2.49999 8.33335 2.49999H9.58335M5.41669 15C5.24585 15.835 4.48169 17.6383 5.26335 18.2208C5.67169 18.5183 6.32252 18.2008 7.62502 17.5658C8.53835 17.12 9.46335 16.6092 10.4625 16.3792C10.8275 16.2958 11.2 16.26 11.6667 16.25C14.8092 16.25 16.3809 16.25 17.3567 15.2733C18.2892 14.3417 18.3317 12.8667 18.3334 9.99999M6.66669 11.6667H11.6667M6.66669 7.49999H9.16669"
+                    stroke="#E85D24"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+            &nbsp;{{ 'program.modal.comment.submit'|__ }}
+        </button>
+    </div>
+</form>

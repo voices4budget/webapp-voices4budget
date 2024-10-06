@@ -1,0 +1,363 @@
+url = "/results"
+layout = "default"
+title = "Hasil Vote"
+
+[categoriesList]
+
+
+[votingSessionsList]
+
+
+[areasList]
+
+==
+<div class="bg-gradient text-white greeting-box gb-mintop gbm-lite">
+    <div class="container">
+        <h1>{{ 'result.banner.title'|__ }}</h1>
+        <p>{{ 'result.banner.subtitle'|__ }}</p>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="container">
+        <form class="mintop-page mp-filter">
+            <label class="form-label">Filter:</label>
+            <div>
+                <select class="form-select" onChange="this.form.submit()">
+                    {% for session in votingSessionsList.list %}
+                        <option value="{{ session.id }}" {{ loop.first ? 'selected' : '' }}>{{ session.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {# <div>
+                <select class="form-select">
+                    {% for area in areasList.list %}
+                        <option value="{{ area.id }}">{{ area.name }}</option>
+                    {% endfor %}
+                </select>
+            </div> #}
+        </form>
+        {% if votingSessionsList.list.isEmpty %}
+            <div class="empty-box">
+                <div class="eb-img">
+                    <img src="{{ 'assets/img/vote-results.svg'|theme }}" alt="" />
+                </div>
+                <div class="eb-text">
+                    <div class="ebt-title">There are no voting results yet</div>
+                    <div class="text-muted">
+                        {% if activeVotingSession.session %}
+                            You can see the voting results on
+                            <span class="fw-600">{{ activeVotingSession.session.ends_at.format('F j') }}</span>
+                        {% else %}
+                            There are no active voting session available at the moment.
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="card-list clr-result">
+                {% for category in categoriesList.categories %}
+                    <div class="cl-item cli-view">
+                        <div class="cli-result w-100">
+                            <div class="cli-header">
+                                <div class="clih-title">{{ category.title }}</div>
+                                <a href="">{{ 'result.expand_all'|__ }}</a>
+                            </div>
+                            <div class="accordion" id="accordion-category-{{ category.id }}">
+                                {% for subcategory in category.children %}
+                                    <div class="accordion-item">
+                                        <div class="accordion-header">
+                                            <button
+                                                class="accordion-button"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#subcategory-{{ subcategory.id }}"
+                                                aria-expanded="false"
+                                                aria-controls="subcategory-{{ subcategory.id }}"
+                                            >
+                                                {{ subcategory.title }}
+                                            </button>
+                                        </div>
+                                        <div
+                                            id="subcategory-{{ subcategory.id }}"
+                                            class="accordion-collapse collapse {{ loop.first ? 'show' : '' }}"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="card-list">
+                                                    {% for program in subcategory.rankedPrograms(this.request.query('session') ?? votingSessionsList.list.first.id ?? '', 3) %}
+                                                        <div
+                                                            class="cl-item program-item"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modalChart"
+                                                            data-program-id="{{ program.id }}"
+                                                        >
+                                                            <div class="cli-count clic-best">{{ loop.index }}</div>
+                                                            <div class="cli-text">{{ program.title }}</div>
+                                                            <div class="cli-vote">
+                                                                <div class="cliv-count">{{ program.votes_count }}</div>
+                                                                <div class="cliv-label">
+                                                                    {{ 'result.vote.unit'|__ }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="text-end">
+                                                    <a
+                                                        class="primary-link"
+                                                        data-bs-toggle="offcanvas"
+                                                        href="#fullRanking"
+                                                        role="button"
+                                                        aria-controls="fullRanking"
+                                                        data-request="onShowFullRanking"
+                                                        data-request-data="{ category_id: {{ subcategory.id }}, voting_session_id: {{ this.request.query('session') ?? votingSessionsList.list.first.id ?? '' }} }"
+                                                        data-request-update="{ 'components/full-ranking': '#full-ranking' }"
+                                                        >{{ 'result.see_full_ranking'|__ }}</a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start full-ranking" tabindex="-1" id="fullRanking" aria-labelledby="fullRankingLabel">
+    <div class="offcanvas-header">
+        <div class="offcanvas-title" id="fullRankingLabel">Implementation of Siltap Expenditure, Allowances</div>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="card-list" id="full-ranking"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalChart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable modal-program">
+        <div class="modal-content">
+            <div class="modal-body" id="modal-chart-body">
+                <div class="card-list cl-onmodal clo-subtitle">
+                    <div class="cl-item">
+                        <div class="cli-text" id="program-title">Program</div>
+                        <div class="cli-sub">
+                            <span id="program-category">Category</span>
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M15.187 12L7.46999 4.285C7.32266 4.13767 7.24999 3.96033 7.25199 3.753C7.25399 3.54633 7.32866 3.369 7.47599 3.221C7.62399 3.07367 7.80166 3 8.00899 3C8.21566 3 8.39299 3.07367 8.54099 3.221L16.177 10.864C16.3383 11.0253 16.4563 11.2053 16.531 11.404C16.6057 11.6027 16.6427 11.8013 16.642 12C16.6413 12.1987 16.6043 12.3973 16.531 12.596C16.4577 12.7947 16.3397 12.9747 16.177 13.136L8.53499 20.78C8.38699 20.9273 8.21033 21 8.00499 20.998C7.80033 20.996 7.62433 20.9213 7.47699 20.774C7.32966 20.6267 7.25599 20.4493 7.25599 20.242C7.25599 20.0347 7.32966 19.8577 7.47699 19.711L15.187 12Z"
+                                    fill="black"
+                                />
+                            </svg>
+                            <span id="program-subcategory">Subcategory</span>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="chart-plate">
+                    <div class="total-vote">{{ 'results.program.total_votes'|__ }}: <span class="fw-600" id="program-total-votes">0</span></div>
+                    <div class="chart-list">
+                        <div class="chl-item">
+                            <div class="chli-title">By Age</div>
+                            <div class="chli-canvas" style="height: 240px;">
+                                <canvas id="myChart" style="width:100%;height: 240px;"></canvas>
+                            </div>
+                        </div>
+                        <div class="chl-item">
+                            <div class="chli-title">By Gender</div>
+                            <div class="chli-canvas" style="height: 240px;">
+                                <canvas id="myChart1" style="width:100%;height: 240px;"></canvas>
+                            </div>
+                        </div>
+                        <div class="chl-item">
+                            <div class="chli-title">By Dusun</div>
+                            <div class="chli-canvas" style="height: 240px;">
+                                <canvas id="myChart2" style="width:100%;height: 240px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if votingSessionsList.list and activeVotingSession.session %}
+
+{% put scripts %}
+    <!-- Chart js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    <script>
+        $('.program-item').click(function() {
+            oc.ajax('onGetVotesChartData', {
+                data: {
+                    voting_session_id: '{{ this.request.query('session') ?? votingSessionsList.list.first.id }}',
+                    program_id: $(this).data('programId')
+                },
+                complete: function (data) {
+                    if (data.success) {
+                        $('#program-title').html(data.program.title);
+                        $('#program-category').html(data.program.category.parent.title);
+                        $('#program-subcategory').html(data.program.category.title);
+                        $('#program-total-votes').html(data.total);
+                        initiateChart(data);
+                    } else {
+                        // Swal.fire({
+                        //     title: '{{ 'general.failed'|__ }}',
+                        //     text: data.message,
+                        //     icon: 'danger',
+                        //     customClass: 'swal-custom',
+                        //     reverseButtons: true,
+                        //     confirmButtonColor: '#E85D24',
+                        //     // cancelButtonColor: '#d33',
+                        //     confirmButtonText: '{{ 'general.ok'|__ }}',
+                        // }).then((result) => {
+                        //     if (result.isConfirmed) {
+                        //         location.reload();
+                        //     }
+                        // });
+                    }
+                },
+            });
+        });
+
+        function toTitleCase(str) {
+            return str.replace(
+                /\w\S*/g,
+                text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+            );
+        }
+
+        var ageChart, genderChart, dusunChart;
+        
+        var initiateChart = function (dataset) {
+            const pieChartColors = [ "#1988ff","#63b00a","#ff5353","#b2bacd",
+                "#8E4585", "#4682B4", "#B8860B", "#7CFC00", "#8F00FF", "#228B22", "#5B92E5", "#9932CC", 
+                "#FF007F", "#556B2F", "#C71585", "#2E8B57", "#6A5ACD", "#B03060", "#3CB371", "#D2691E", 
+                "#4B0082", "#8B0000", "#7B68EE", "#B22222", "#8A2BE2", "#DC143C", "#800080", "#66CDAA", 
+                "#9400D3", "#FF4500", "#483D8B", "#FF6347", "#8B4513", "#BA55D3", "#BDB76B", "#4682B4", 
+                "#8E4585", "#006400", "#8B008B", "#2F4F4F", "#9932CC", "#20B2AA", "#A52A2A", "#556B2F", 
+                "#C71585", "#6A5ACD", "#B8860B", "#8B0000", "#7FFF00", "#8F00FF", "#228B22", "#D2691E", 
+                "#5B92E5", "#B03060", "#3CB371", "#4B0082", "#7B68EE", "#8A2BE2", "#FF007F", "#800080", 
+                "#556B2F", "#B22222", "#4682B4", "#66CDAA", "#BDB76B", "#8B4513", "#DC143C", "#20B2AA", 
+                "#9932CC", "#B03060", "#8E4585", "#2E8B57", "#9400D3", "#3CB371", "#4B0082", "#8B008B", 
+                "#8F00FF", "#4682B4", "#8A2BE2", "#228B22", "#7B68EE", "#8B0000", "#FF4500", "#556B2F", 
+                "#C71585", "#B22222", "#6A5ACD", "#9932CC", "#B8860B", "#800080", "#FF6347", "#2F4F4F", 
+                "#BDB76B", "#7FFF00", "#A52A2A", "#483D8B", "#20B2AA", "#8B4513", "#D2691E", "#8E4585"
+            ];
+            
+            var xValues = Object.keys(dataset.age).map((data) => data + ' years old');
+            var yValues = Object.values(dataset.age);
+            // var barColors = pieChartColors.slice(0, xValues.length)''
+
+            var xValues1 = Object.keys(dataset.gender).map((data) => toTitleCase(data));
+            var yValues1 = Object.values(dataset.gender);
+
+            var xValues2 = Object.keys(dataset.dusun);
+            var yValues2 = Object.values(dataset.dusun);
+
+            if (ageChart) {
+                ageChart.destroy();
+            }
+
+            if (genderChart) {
+                genderChart.destroy();
+            }
+
+            if (dusunChart) {
+                dusunChart.destroy();
+            }
+
+            ageChart = new Chart('myChart', {
+                type: 'pie',
+                data: {
+                    labels: xValues,
+                    datasets: [
+                        {
+                            backgroundColor: pieChartColors,
+                            data: yValues,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            // fontColor: "white",
+                            boxWidth: 20,
+                            padding: 20,
+                        },
+                    },
+                },
+            });
+
+            genderChart = new Chart('myChart1', {
+                type: 'pie',
+                data: {
+                    labels: xValues1,
+                    datasets: [
+                        {
+                            backgroundColor: pieChartColors,
+                            data: yValues1,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            // fontColor: "white",
+                            boxWidth: 20,
+                            padding: 20,
+                        },
+                    },
+                },
+            });
+
+            dusunChart = new Chart('myChart2', {
+                type: 'pie',
+                data: {
+                    labels: xValues2,
+                    datasets: [
+                        {
+                            backgroundColor: pieChartColors,
+                            data: yValues2,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            // fontColor: "white",
+                            boxWidth: 20,
+                            padding: 20,
+                        },
+                    },
+                },
+            });
+        };
+    </script>
+{% endput %}
+
+{% endif %}

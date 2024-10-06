@@ -1,0 +1,132 @@
+title = "Ubah Profil"
+layout = "default"
+url = "/profile"
+
+[session]
+security = "user"
+redirect = "home"
+
+[areaTypesList]
+
+
+[account]
+
+==
+<div class="bg-gradient text-white greeting-box gb-mintop">
+    <div class="container">
+        <h1>Update Profile</h1>
+        <p>Make Changes to Your Personal Information</p>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="container">
+        <div class="mintop-page">
+            <form
+                class=""
+                data-request="onUpdateProfile"
+                data-request-flash
+                {% if this.request.query('ref') %}
+                    data-request-success="setTimeout(() => window.location.href = '{{ this.request.query('ref') }}', 3000);"
+                {% endif %}
+            >
+                <div class="mp-split">
+                    <div class="mps-col">
+                        <div>
+                            <label for="inputFirstName" class="form-label">First Name</label>
+                            <input
+                                type="text"
+                                name="first_name"
+                                class="form-control"
+                                value="{{ user.first_name }}"
+                                id="inputFirstName"
+                            />
+                        </div>
+                        <div>
+                            <label for="inputLastName" class="form-label">Name</label>
+                            <input
+                                type="text"
+                                name="last_name"
+                                class="form-control"
+                                value="{{ user.last_name }}"
+                                id="inputLastName"
+                            />
+                        </div>
+                        <div>
+                            <label for="inputAge" class="form-label">Age</label>
+                            <select name="data[age]" id="inputAge" class="form-select" aria-label="Age">
+                                <option>-- Select Age Range --</option>
+                                <option value="17-25" {{ user.data['age'] == '17-25' ? 'selected' : '' }}>
+                                    17-25 years old
+                                </option>
+                                <option value="26-45" {{ user.data['age'] == '26-45' ? 'selected' : '' }}>
+                                    26-45 years old
+                                </option>
+                                <option value="46-65" {{ user.data['age'] == '46-65' ? 'selected' : '' }}>
+                                    46-65 years old
+                                </option>
+                                <option value="OTHERS" {{ user.data['age'] == 'OTHERS' ? 'selected' : '' }}>
+                                    Others
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="inputGender" class="form-label">Gender</label>
+                            <select
+                                name="data[gender]"
+                                id="inputGender"
+                                class="form-select"
+                                aria-label="Default select example"
+                            >
+                                <option>-- Select Gender --</option>
+                                <option value="MALE" {{ user.data['gender'] == 'MALE' ? 'selected' : '' }}>Male</option>
+                                <option value="FEMALE" {{ user.data['gender'] == 'FEMALE' ? 'selected' : '' }}>
+                                    Female
+                                </option>
+                                <option value="OTHERS" {{ user.data['gender'] == 'OTHERS' ? 'selected' : '' }}>
+                                    Others
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mps-col">
+                        <input type="hidden" name="data[country]" value="{{ user.data['country'] }}" />
+                        {% for type in areaTypesList.list %}
+                            <div>
+                                <label for="area-{{ type.id }}" class="form-label">{{ type.name }}</label>
+                                <select
+                                    class="form-select"
+                                    id="area-{{ type.id }}"
+                                    name="data[area-{{ type.id }}]"
+                                    {% if type.child %}
+                                        data-request="onAreaChanged" data-request-data="{changed: '{{ type.id }}'}"
+                                        data-request-update="{components/area-options: '#area-{{ type.child.id }}'}"
+                                        data-request-before-update="$(this).closest('div').nextAll().find('option[value!=\'\']').remove()"
+                                    {% endif %}
+                                >
+                                    <option value="">-- Pilih {{ type.name }} --</option>
+                                    {% if not type.parent or user.data['area-' ~ type.id] %}
+                                        {% for area in type.areas %}
+                                            <option
+                                                value="{{ area.id }}"
+                                                {{ user.data['area-' ~ type.id] == area.id ? 'selected' : '' }}
+                                            >
+                                                {{ area.name }}
+                                            </option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        {% endfor %}
+                        <div class="example-captcha">
+                            <img src="img/captcha.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mp-cta">
+                    <button class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

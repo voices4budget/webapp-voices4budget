@@ -1,3 +1,120 @@
-title = "Home"
 url = "/"
+layout = "default"
+title = "Beranda"
+
+[categoriesList]
+
+
+[viewBag]
+localeUrl[en] = "/"
+localeUrl[th] = "/"
+localeTitle[en] = "Home"
+localeTitle[th] = "หน้าแรก"
 ==
+{% partial 'components/hero-banner' title='home.banner.title'|__ subtitle='home.banner.subtitle'|__ %}
+
+<div class="main-content">
+    <div class="container">
+        <h2 class="fw-600">{{ 'categories.select'|__ }}</h2>
+        <div class="mc-tab">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {% for category in categoriesList.categories %}
+                    <button
+                        class="nav-link {{ loop.first ? 'active' : '' }}"
+                        id="v-pills-{{ category.id }}-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#v-pills-{{ category.id }}"
+                        type="button"
+                        role="tab"
+                        aria-controls="v-pills-{{ category.id }}"
+                        aria-selected="true"
+                    >
+                        {{ category.title }}
+                    </button>
+                {% endfor %}
+            </div>
+            <div class="tab-content" id="v-pills-tabContent">
+                {% for category in categoriesList.categories %}
+                    <div
+                        class="tab-pane fade {{ loop.first ? 'show active' : '' }}"
+                        id="v-pills-{{ category.id }}"
+                        role="tabpanel"
+                        aria-labelledby="v-pills-{{ category.id }}-tab"
+                        tabindex="0"
+                    >
+                        <div class="alert-basic">
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <g clip-path="url(#clip0_27_3)">
+                                    <path
+                                        d="M10.56 1.8092V6.20305C13.6615 6.20305 16.1723 8.71382 16.1723 11.8154H20.5662C20.5292 6.2769 16.0615 1.8092 10.56 1.8092Z"
+                                        fill="#F1786B"
+                                    />
+                                    <path
+                                        d="M20.8985 12.1477H16.5046C16.5046 13.6984 15.8769 15.1015 14.8431 16.1354L17.9446 19.2369C19.7908 17.4277 20.8985 14.9169 20.8985 12.1477Z"
+                                        fill="#FDC77C"
+                                    />
+                                    <path
+                                        d="M14.1416 16.1354C13.1077 17.1692 11.7046 17.7969 10.1539 17.7969C7.05232 17.7969 4.54155 15.2861 4.54155 12.1846C4.54155 9.08305 7.05232 6.57228 10.1539 6.57228V2.14151C4.65232 2.14151 0.184631 6.64613 0.184631 12.1477C0.184631 17.6492 4.65232 22.1538 10.1908 22.1538C12.96 22.1538 15.4708 21.0461 17.28 19.2369L14.1416 16.1354Z"
+                                        fill="#5AC8AE"
+                                    />
+                                    <path d="M8.04925 0.184601H0.184631V1.32922H8.04925V0.184601Z" fill="#788D9A" />
+                                    <path d="M23.8154 0.184601H15.9508V1.32922H23.8154V0.184601Z" fill="#788D9A" />
+                                    <path d="M23.8154 22.6707H15.9508V23.8154H23.8154V22.6707Z" fill="#788D9A" />
+                                    <path
+                                        d="M3.13571 2.03038L2.8418 2.25388L5.50137 5.75139L5.79527 5.52789L3.13571 2.03038Z"
+                                        fill="#788D9A"
+                                    />
+                                    <path
+                                        d="M19.7585 1.65658L15.419 6.19186L15.6858 6.44713L20.0253 1.91184L19.7585 1.65658Z"
+                                        fill="#788D9A"
+                                    />
+                                    <path
+                                        d="M20.3815 21.8215L17.7231 14.6215L18.0554 14.5107L20.7139 21.7107L20.3815 21.8215Z"
+                                        fill="#788D9A"
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_27_3">
+                                        <rect width="24" height="24" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <div class="text-muted">
+                                {% if not activeVotingSession.session.hasEnded %}
+                                {{ 'vote.see_results_on'|__ }} <span class="fw-600">{{ activeVotingSession.session.ends_at.format('j F Y, H:i') }}</span>
+                                {% else %}
+                                {{ 'vote.results_available'|__ }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="fw-700">{{ category.title }}</div>
+                        <div class="list-link">
+                            {% for subCategory in category.children %}
+                                <a href="{{ ('/category/' ~ subCategory.id)|localeUrl(this.site.locale) }}" class="ll-item {{ user and subCategory.isVotedByCurrentUser ? 'lli-done': '' }}">
+                                    <div class="lli-text">{{ subCategory.title }}</div>
+                                    <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M15.187 12L7.46999 4.285C7.32266 4.13767 7.24999 3.96033 7.25199 3.753C7.25399 3.54633 7.32866 3.369 7.47599 3.221C7.62399 3.07367 7.80166 3 8.00899 3C8.21566 3 8.39299 3.07367 8.54099 3.221L16.177 10.864C16.3383 11.0253 16.4563 11.2053 16.531 11.404C16.6057 11.6027 16.6427 11.8013 16.642 12C16.6413 12.1987 16.6043 12.3973 16.531 12.596C16.4577 12.7947 16.3397 12.9747 16.177 13.136L8.53499 20.78C8.38699 20.9273 8.21033 21 8.00499 20.998C7.80033 20.996 7.62433 20.9213 7.47699 20.774C7.32966 20.6267 7.25599 20.4493 7.25599 20.242C7.25599 20.0347 7.32966 19.8577 7.47699 19.711L15.187 12Z"
+                                        />
+                                    </svg>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

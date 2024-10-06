@@ -1,0 +1,14 @@
+<div class="comment-area">
+    <div class="ca-top">
+        <h6 class="fw-500">{{ 'program.modal.comment.label'|__ }}</h6>
+    </div>
+    <div class="ca-value" id="comment-{{program.id}}">
+        {% set comment = program.comments().currentSessionBy(user.id).first %}
+
+        {% if comment %}
+            {% partial 'components/commented' comment = comment %}
+        {% else %}
+            {% partial 'components/comment-form' program = program %}
+        {% endif %}
+    </div>
+</div>
