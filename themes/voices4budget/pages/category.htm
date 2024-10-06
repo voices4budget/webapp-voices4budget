@@ -43,7 +43,7 @@ function onRedirectToProfile() {
                     </div>
                     {% if user %}
                     <div class="badge-voted">
-                        <span class="text-gray">{{ 'vote.categories_voted'|__ }}:</span> {{ categoryDetail.votedCounts }} {{ 'general.of'|__ }} {{ categoryDetail.subcategoriesCount }}
+                        <span class="text-gray">{{ 'vote.categories_voted'|__ }}:</span> {{ categoryDetail.votedCounts(activeVotingSession.session.id) }} {{ 'general.of'|__ }} {{ categoryDetail.subcategoriesCount(activeVotingSession.session.id) }}
                     </div>
                     {% endif %}
                 </div>
@@ -53,7 +53,7 @@ function onRedirectToProfile() {
             {% for program in categoryDetail.category.programs %}
                 <div
                     id="program-item-{{ program.id }}"
-                    class="cl-item program {% if user and program.isVotedByCurrentUser %} cli-selected {% endif %}"
+                    class="cl-item program {% if user and program.isVotedByCurrentUser(activeVotingSession.session.id) %} cli-selected {% endif %}"
                     data-bs-toggle="modal"
                     data-bs-target="#program-{{ program.id }}"
                     data-program-id="{{ program.id }}"
@@ -92,32 +92,32 @@ function onRedirectToProfile() {
                                 <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">
                                     {{ 'modal.cancel'|__ }}
                                 </button>
-                                    <button
-                                        type="button"
-                                        class="btn btn-primary {{ user and user.hasCompletedProfile ? 'vote' : '' }} {{ user and categoryDetail.category.isVotedByCurrentUser ? 'd-none' : '' }}"
-                                        {% if user and user.hasCompletedProfile and not categoryDetail.category.isVotedByCurrentUser %}
-                                            data-program-id="{{ program.id }}"
-                                            data-bs-dismiss="modal"
-                                        {% endif %}
-                                        {% if user and not user.hasCompletedProfile %}
-                                            data-request="onRedirectToProfile"
-                                            data-request-flash
-                                        {% endif %}
-                                        {% if not user %}
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modal-sign-in"
-                                        {% endif %}
-                                        {{ activeVotingSession.session.hasEnded ? 'disabled' : '' }}
-                                    >
-                                        {{ activeVotingSession.session.hasEnded ? 'program.modal.ended_vote_session'|__ : 'program.modal.vote'|__ }}
-                                    </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary {{ user and user.hasCompletedProfile ? 'vote' : '' }} {{ user and categoryDetail.category.isVotedByCurrentUser(activeVotingSession.session.id) ? 'd-none' : '' }}"
+                                    {% if user and user.hasCompletedProfile and not categoryDetail.category.isVotedByCurrentUser(activeVotingSession.session.id) %}
+                                        data-program-id="{{ program.id }}"
+                                        data-bs-dismiss="modal"
+                                    {% endif %}
+                                    {% if user and not user.hasCompletedProfile %}
+                                        data-request="onRedirectToProfile"
+                                        data-request-flash
+                                    {% endif %}
+                                    {% if not user %}
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-sign-in"
+                                    {% endif %}
+                                    {{ not activeVotingSession.session.hasStarted or activeVotingSession.session.hasEnded ? 'disabled' : '' }}
+                                >
+                                    {{ not activeVotingSession.session.hasStarted ? 'program.modal.not_started_vote_session'|__ : activeVotingSession.session.hasEnded ? 'program.modal.ended_vote_session'|__ : 'program.modal.vote'|__ }}
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-        {% if user and not activeVotingSession.session.hasEnded and not categoryDetail.category.isVotedByCurrentUser %}
+        {% if user and activeVotingSession.session.hasStarted and not activeVotingSession.session.hasEnded and not categoryDetail.category.isVotedByCurrentUser(activeVotingSession.session.id) %}
             <div class="cta-submit">
                 <button class="btn btn-primary" id="btn-submit-vote">{{ 'vote.submit'|__ }} (<span id="voted-count">0</span>/{{ categoryDetail.category.max_vote }})</button>
             </div>
@@ -127,7 +127,7 @@ function onRedirectToProfile() {
 
 {% partial 'components/idea-banner' %}
 
-{% if user and not activeVotingSession.session.hasEnded and not categoryDetail.category.isVotedByCurrentUser %}
+{% if user and activeVotingSession.session.hasStarted and not activeVotingSession.session.hasEnded and not categoryDetail.category.isVotedByCurrentUser(activeVotingSession.session.id) %}
 {% put scripts %}
     <script type="text/javascript">
         $(function () {

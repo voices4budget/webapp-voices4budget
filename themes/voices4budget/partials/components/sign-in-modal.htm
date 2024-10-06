@@ -71,7 +71,7 @@
                 });
             };
             window.google.accounts.id.initialize({
-                client_id: '672931818105-fastkier099cgs98auipq9984k49notd.apps.googleusercontent.com',
+                client_id: '{{ settings.get('misc_google_client_id') }}',
                 ux_mode: 'popup',
                 callback: onAuthenticated,
             });
