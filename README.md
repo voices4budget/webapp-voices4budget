@@ -1,74 +1,66 @@
-<p align="center">
-    <img src="https://github.com/octobercms/october/blob/develop/themes/demo/assets/images/favicon.png?raw=true" alt="October" width="25%" height="25%" />
-</p>
+# Voices4Budget
 
-[October](https://octobercms.com) is a Content Management System (CMS) and web platform whose sole purpose is to make your development workflow simple again. It was born out of frustration with existing systems. We feel building websites has become a convoluted and confusing process that leaves developers unsatisfied. We want to turn you around to the simpler side and get back to basics.
+Voices4Budget is a digital empowerment initiative, supported by Accountability Lab and Development Gateway. This project is currently piloted in Nupabomba Village, Indonesia, and Ban Jamrung, Thailand. The program is designed to advance transparency and accountability in the management of village funds by offering accessible budgetary information, encouraging active community engagement, reinforcing oversight mechanisms, and enhancing digital literacy. By implementing these measures, Voices4Budget aims to ensure the efficient and equitable utilization of village resources, thereby promoting sustainable development and improving the quality of life within local communities.
 
-October's mission is to show the world that web development is not rocket science.
+## Installation
 
-[![Build Status](https://github.com/octobercms/library/actions/workflows/tests.yml/badge.svg)](https://octobercms.com/)
-[![Downloads](https://img.shields.io/packagist/dt/october/rain)](https://docs.octobercms.com/)
-[![Version](https://img.shields.io/packagist/v/october/october)](https://octobercms.com/changelog)
-[![License](https://poser.pugx.org/october/october/license.svg)](./LICENSE.md)
+To install and run Voices4Budget locally, follow these steps:
 
-> *Please note*: October is open source but it is not free software. A license with a small fee is required for each website you build with October CMS.
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   ```
 
-## Installing October
+2. **Create a `.env` file**:
+   Adjust the necessary environment variables, especially the database configuration.
 
-Instructions on how to install October can be found at the [installation guide](https://docs.octobercms.com/3.x/setup/installation.html).
+3. **Install dependencies**:
+   ```bash
+   composer install
+   ```
 
-### Quick Start Installation
+4. **Run migrations**:
+   ```bash
+   php artisan october:migrate
+   ```
 
-If you have composer installed, run this in your terminal to install October CMS from command line. This will place the files in a directory named **myoctober**.
+## Usage
 
-    composer create-project october/october myoctober
+1. **Login as Administrator**: Use your admin credentials to access the back office.
+2. **Set Up Locations**: Add details such as countries, area types, areas, and stakeholders.
+3. **Create Voting Sessions**: Set up voting sessions along with categories, subcategories, and programs.
+4. **Set up Google OAuth 2.0**: 
+   - Create a project in the Google API Console and create OAuth 2.0 credentials.
+   - Copy and paste the Google OAuth 2.0 client ID to the Backoffice -> Settings -> Voices4Budget Content Settings -> Miscellaneous -> Google OAuth 2.0 Client ID.
 
-If you plan on using a database, run this command inside the application directory.
+## Technologies Used
 
-    php artisan october:install
-
-## Learning October
-
-The best place to learn October CMS is by [reading the documentation](https://docs.octobercms.com) or [following some tutorials](https://octobercms.com/support/articles/tutorials).
-
-You may also watch this [introductory video](https://www.youtube.com/watch?v=yLZTOeOS7wI). Make sure to check out our [official YouTube channel](https://www.youtube.com/c/OctoberCMSOfficial). There is also the excellent video series by [Watch & Learn](https://watch-learn.com/series/making-websites-with-october-cms).
-
-For code examples of building with October CMS, visit the [RainLab Plugin Suite](https://github.com/rainlab) or the [October Demos Repo](https://github.com/octoberdemos).
-
-## Coding Standards
-
-Please follow the following guides and code standards:
-
-* [PSR 4 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
-* [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-* [PSR 1 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
-
-## Security Vulnerabilities
-
-Please review [our security policy](https://github.com/octobercms/october/security/policy) on how to report security vulnerabilities.
-
-## Development Team
-
-October CMS was created by [Alexey Bobkov](https://www.linkedin.com/in/alexey-bobkov-232ba02b/) and [Samuel Georges](https://www.linkedin.com/in/samuel-georges-0a964131/), who both continue to develop the platform.
-
-## Foundation library
-
-The CMS uses [Laravel](https://laravel.com) as a foundation PHP framework.
-
-## Contact
-
-For announcements and updates:
-
-* [Contact Us Page](http://octoberdev.test/contact)
-* [Follow us on Twitter](https://twitter.com/octobercms)
-* [Like us on Facebook](https://facebook.com/octobercms)
-
-To chat or hang out:
-
-* [Join us on Slack](https://octobercms.slack.com)
-* [Join us on Discord](https://discord.gg/gEKgwSZ)
-* [Join us on Telegram](https://t.me/octoberchat)
+- **Platform**: October CMS v3
+- **UI Framework**: Bootstrap 5.3
 
 ## License
 
-The October CMS platform is licensed software, see [End User License Agreement](./LICENSE.md) (EULA) for more details.
+Voices4Budget is free to use; however, it is built on top of October CMS, which is a paid platform. You will need a valid license for October CMS to use the full features of this application. For more information, visit [October CMS](https://octobercms.com/).
+
+## Contributing
+
+We welcome contributions! Please follow these guidelines:
+
+- Fork the repository.
+- Create a new branch for your feature or bugfix.
+- Submit a pull request with a detailed description of your changes.
+
+## Authors
+
+Team Voices4Budget  
+Contact: [admin@voices4budget.org](mailto:admin@voices4budget.org)
+
+## Future Enhancements
+
+- Improve country selection functionality for better user experience.
+- Handle the fraud better by preventing people from outside the voting area to log in and vote
+
+## Acknowledgements
+
+- [AccountabilityLab](https://accountabilitylab.org/)
+- [Development Gateway](https://developmentgateway.org/)
