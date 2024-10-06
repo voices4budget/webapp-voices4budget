@@ -8886,16 +8886,16 @@
         },
         {
             "name": "voices4budget/contents-plugin",
-            "version": "0.0.35",
+            "version": "0.0.39",
             "source": {
                 "type": "git",
-                "url": "git@github.com:gugigustaman/voices4budget-contents-oc-plugin.git",
-                "reference": "e131ad5c2d6c0e1cd05f32986c54f29f6bf4f9f6"
+                "url": "git@github.com:voices4budget/voices4budget-contents-oc-plugin.git",
+                "reference": "2fa05dd67773444c19ab7f76ef1c458a370f121d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gugigustaman/voices4budget-contents-oc-plugin/zipball/e131ad5c2d6c0e1cd05f32986c54f29f6bf4f9f6",
-                "reference": "e131ad5c2d6c0e1cd05f32986c54f29f6bf4f9f6",
+                "url": "https://api.github.com/repos/voices4budget/voices4budget-contents-oc-plugin/zipball/2fa05dd67773444c19ab7f76ef1c458a370f121d",
+                "reference": "2fa05dd67773444c19ab7f76ef1c458a370f121d",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -8935,7 +8935,7 @@
                 "issues": "https://github.com/gugigustaman/voices4budget-contents-oc-plugin/issues",
                 "source": "https://github.com/gugigustaman/voices4budget-contents-oc-plugin"
             },
-            "time": "2024-08-22T10:25:36+00:00"
+            "time": "2024-09-06T09:32:48+00:00"
         },
         {
             "name": "voku/portable-ascii",
