@@ -42,7 +42,7 @@ redirect = "home"
                 <div class="mp-split">
                     <div class="mps-col">
                         <div>
-                            <label for="inputFirstName" class="form-label">Nama Depan</label>
+                            <label for="inputFirstName" class="form-label">{{ 'profile.first_name'|__ }}</label>
                             <input
                                 type="text"
                                 name="first_name"
@@ -52,7 +52,7 @@ redirect = "home"
                             />
                         </div>
                         <div>
-                            <label for="inputLastName" class="form-label">Nama Belakang</label>
+                            <label for="inputLastName" class="form-label">{{ 'profile.last_name'|__ }}</label>
                             <input
                                 type="text"
                                 name="last_name"
@@ -62,38 +62,38 @@ redirect = "home"
                             />
                         </div>
                         <div>
-                            <label for="inputAge" class="form-label">Rentang Usia</label>
+                            <label for="inputAge" class="form-label">{{ 'profile.age'|__ }}</label>
                             <select name="data[age]" id="inputAge" class="form-select" aria-label="Age">
-                                <option>-- Pilih rentang usia --</option>
+                                <option>-- {{ 'profile.age.select'|__ }} --</option>
                                 <option value="15-25" {{ user.data['age'] == '15-25' ? 'selected' : '' }}>
-                                    15-25 tahun
+                                    15-25 {{ 'profile.age.unit'|__ }}
                                 </option>
                                 <option value="26-45" {{ user.data['age'] == '26-45' ? 'selected' : '' }}>
-                                    26-45 tahun
+                                    26-45 {{ 'profile.age.unit'|__ }}
                                 </option>
                                 <option value="46-65" {{ user.data['age'] == '46-65' ? 'selected' : '' }}>
-                                    46-65 tahun
+                                    46-65 {{ 'profile.age.unit'|__ }}
                                 </option>
                                 <option value="OTHERS" {{ user.data['age'] == 'OTHERS' ? 'selected' : '' }}>
-                                    Lainnya
+                                    {{ 'profile.age.others'|__ }}
                                 </option>
                             </select>
                         </div>
                         <div>
-                            <label for="inputGender" class="form-label">Jenis Kelamin</label>
+                            <label for="inputGender" class="form-label">{{ 'profile.gender'|__ }}</label>
                             <select
                                 name="data[gender]"
                                 id="inputGender"
                                 class="form-select"
                                 aria-label="Default select example"
                             >
-                                <option>-- Pilih jenis kelamin --</option>
-                                <option value="MALE" {{ user.data['gender'] == 'MALE' ? 'selected' : '' }}>Male</option>
+                                <option>-- {{ 'profile.gender.select'|__ }} --</option>
+                                <option value="MALE" {{ user.data['gender'] == 'MALE' ? 'selected' : '' }}>{{ 'profile.gender.male'|__ }}</option>
                                 <option value="FEMALE" {{ user.data['gender'] == 'FEMALE' ? 'selected' : '' }}>
-                                    Perempuan
+                                    {{ 'profile.gender.female'|__ }}
                                 </option>
                                 <option value="OTHERS" {{ user.data['gender'] == 'OTHERS' ? 'selected' : '' }}>
-                                    Laki-laki
+                                    {{ 'profile.gender.others'|__ }}
                                 </option>
                             </select>
                         </div>
@@ -130,7 +130,7 @@ redirect = "home"
                     </div>
                 </div>
                 <div class="mp-cta">
-                    <button class="btn btn-primary">Simpan</button>
+                    <button class="btn btn-primary">{{ 'button.save'|__ }}</button>
                 </div>
             </form>
         </div>
